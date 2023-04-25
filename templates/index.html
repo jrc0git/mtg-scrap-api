@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+   <h1>Welcome to my api!</h1>
+   <p class="intro">
+        The idea behind this tiny project is to provide endpoints to retrieve data from different
+        pages related to Magic the Gathering. Many of these sites don't have an api for public use,
+        hence I decided to scrap the data I needed for my personal projects using python's library BeautifulSoup.
+   </p>
+
+   <table>
+        <tr>
+            <th>URL</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>/metadecks/{modern,standard,piooner}</td>
+            <td>Returns meta decks for each format classified by deck type.</td>
+            
+        </tr>
+        <tr>
+            <td>/last-events</td>
+            <td>Returns a list of the last worldwide magic events.</td>
+            
+        </tr>
+   </table>
+   
+</body>
+</html>
