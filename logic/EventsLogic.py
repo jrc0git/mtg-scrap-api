@@ -10,16 +10,6 @@ def getLastEvents():
     events_table= main.find('table', attrs={'style':'width:98%;margin-bottom:20px;'})
     events_tr = events_table.findAll('tr')
     print(type(events_table))
-   
-
-    def filterTds(tag):
-        if(tag.attrs=={'width':'64%', 'class':'S14'}):
-            return True
-        elif(tag.attrs=={'width':'13%', 'align':'center'}):
-            return True
-        elif(tag.attrs=={'width':'9%', 'class':'S12', 'align':'right'}):
-            return True
-        else: return False
     
     for event_tr in events_tr:
         event_content={
@@ -32,4 +22,37 @@ def getLastEvents():
         events.append(event_content)
     
     return events
+
+def getLastEventsFormat(format):
+    url=''
+    events=[]
+    if(format=='modern'): url = MAIN_URL + 'format?f=MO'
+    if(format=='standard'): url = MAIN_URL + 'format?f=ST'
+    if(format=='pioneer'): url = MAIN_URL + 'format?f=PI'
+    response = requests.get(url)
+    main = BeautifulSoup(response.content,'html.parser')
+    events_table= main.find('table', {'class' : 'Stable'})
+    events_tr = events_table.findAll('tr')
+    
+    def checkLocation(tag):
+        value = tag.find('td', {'class' : 'S14'}).find('a', {'class':'und'})
+        if value : return value.getText()
+        else: return 'Unknown' 
+
+
+    for event_tr in events_tr:
+        event_content={
+            'title': event_tr.find('td', {'class' : 'S14'}).find('a').getText(),
+            'location': checkLocation(event_tr),
+            'date': event_tr.find('td', {'class' : 'S12'}).getText(),
+            'url':'www.mtgtop8.com/'+event_tr.find('td', {'class' : 'S14'}).find('a')['href']
+        }
+        events.append(event_content)
+   
+    return events
+
+
+
+
+
         

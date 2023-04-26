@@ -1,7 +1,7 @@
 from flask import Flask, Response, render_template
 from flask_restful import Api, Resource
-from resources.Decks import MetaDecks
-from resources.Events import LastEvents
+from resources.Decks import Decks, DecksMeta
+from resources.Events import LastEvents, LastEventsFormat
 
 from webargs import fields, validate
 from webargs.flaskparser import use_args, use_kwargs, parser, abort
@@ -16,8 +16,10 @@ class Default(Resource):
         return Response(render_template('index.html'), mimetype='text/html')
 
 #Add resources 
-api.add_resource(MetaDecks,'/metadecks')
-api.add_resource(LastEvents,'/last-events')
+api.add_resource(Decks,'/decks')
+api.add_resource(DecksMeta,'/decks/<string:format>')
+api.add_resource(LastEvents,'/events')
+api.add_resource(LastEventsFormat, '/events/<string:format>')
 api.add_resource(Default,'/')
 
 #Handle errors
