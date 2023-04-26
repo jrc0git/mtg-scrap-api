@@ -31,20 +31,17 @@ def getDecksByMeta(meta):
                 else: breakCond=False
             else: break
         for deck in metaResults:
-            metaDic.append({'name':deck[0].getText(), 'url':'www.mtgtop8.com/'+deck[0]['href'], 'img':'www.mtgtop8.com/'+deck[1]['src']})
+            metaDic.append({'name':deck[0].getText(), 'url':'www.mtgtop8.com/'+deck[0]['href'], 'img':'www.mtgtop8.com/'+deck[1]['src'],
+                            'style': tag.getText().split(' ')[0].lower()})
 
         return metaDic
 
 
     for i in range(len(meta_decks)):
-        result.append(
-            {
-                'type': meta_decks[i].getText().split(' ')[0],
-                'decks': getDecks(meta_decks[i])
-            }
-        )
+        for deck in getDecks(meta_decks[i]):
+            result.append(deck)
     
-    return {'data':result}
+    return {'data':result, 'total':len(result)}
 
 
     

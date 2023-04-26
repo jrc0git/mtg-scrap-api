@@ -21,7 +21,7 @@ def getLastEvents():
         }
         events.append(event_content)
     
-    return events
+    return {'data': events, 'total': len(events)}
 
 def getLastEventsFormat(format):
     url=''
@@ -49,7 +49,7 @@ def getLastEventsFormat(format):
         }
         events.append(event_content)
    
-    return events
+    return {'data': events, 'total': len(events)}
 
 
 
